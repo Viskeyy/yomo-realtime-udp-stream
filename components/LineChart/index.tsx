@@ -1,7 +1,7 @@
 'use client';
-import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { Line, LineChart, Tooltip, YAxis } from 'recharts';
 
-const screenWidth = window.innerWidth;
+const screenWidth = window?.innerWidth || 1200;
 
 export default function CustomLineChart(data: { data: any[] | undefined }) {
     return (
