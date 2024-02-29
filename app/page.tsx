@@ -4,41 +4,46 @@ import LineChart from '@/components/LineChart';
 import { decode, encode } from '@msgpack/msgpack';
 import { useEffect, useState } from 'react';
 
+type UdpDatagram = {
+    UdpInDatagrams: number;
+    UdpOutDatagrams: number;
+};
+
 export default function Home() {
-    const [sfnUSA, setSfnUSA] = useState([]);
-    const [sfnDEU, setSfnDEU] = useState([]);
-    const [sfnIND, setSfnIND] = useState([]);
-    const [sfnBRA, setSfnBRA] = useState([]);
-    const [sfnSGP, setSfnSGP] = useState([]);
-    const [sfnAUS, setSfnAUS] = useState([]);
-    const [sfnZAF, setSfnZAF] = useState([]);
+    const [sfnUSA, setSfnUSA] = useState<UdpDatagram[]>([]);
+    const [sfnDEU, setSfnDEU] = useState<UdpDatagram[]>([]);
+    const [sfnIND, setSfnIND] = useState<UdpDatagram[]>([]);
+    const [sfnBRA, setSfnBRA] = useState<UdpDatagram[]>([]);
+    const [sfnSGP, setSfnSGP] = useState<UdpDatagram[]>([]);
+    const [sfnAUS, setSfnAUS] = useState<UdpDatagram[]>([]);
+    const [sfnZAF, setSfnZAF] = useState<UdpDatagram[]>([]);
 
     const URL_DEBG = 'prscd2.allegro.earth';
     const uid = 'ws-' + (Math.random() + 1).toString(36).substring(7);
 
-    const handleSignalling = (sig) => {
+    const handleSignalling = (sig: any) => {
         if (sig.t === 'data') {
             switch (sig.p) {
                 case 'vm-sfn-usa':
-                    setSfnUSA((prev) => [...prev, decode(sig.pl)]);
+                    setSfnUSA((prev) => [...prev, decode(sig.pl) as UdpDatagram]);
                     break;
                 case 'vm-sfn-deu':
-                    setSfnDEU((prev) => [...prev, decode(sig.pl)]);
+                    setSfnDEU((prev) => [...prev, decode(sig.pl) as UdpDatagram]);
                     break;
                 case 'vm-sfn-ind':
-                    setSfnIND((prev) => [...prev, decode(sig.pl)]);
+                    setSfnIND((prev) => [...prev, decode(sig.pl) as UdpDatagram]);
                     break;
                 case 'vm-sfn-bra':
-                    setSfnBRA((prev) => [...prev, decode(sig.pl)]);
+                    setSfnBRA((prev) => [...prev, decode(sig.pl) as UdpDatagram]);
                     break;
                 case 'vm-sfn-sgp':
-                    setSfnSGP((prev) => [...prev, decode(sig.pl)]);
+                    setSfnSGP((prev) => [...prev, decode(sig.pl) as UdpDatagram]);
                     break;
                 case 'vm-sfn-aus':
-                    setSfnAUS((prev) => [...prev, decode(sig.pl)]);
+                    setSfnAUS((prev) => [...prev, decode(sig.pl) as UdpDatagram]);
                     break;
                 case 'vm-sfn-zaf':
-                    setSfnZAF((prev) => [...prev, decode(sig.pl)]);
+                    setSfnZAF((prev) => [...prev, decode(sig.pl) as UdpDatagram]);
                     break;
                 default:
                     console.log('!! unknown p', sig);

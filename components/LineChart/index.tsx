@@ -3,7 +3,7 @@ import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 
 const screenWidth = window.innerWidth;
 
-export default function CustomLineChart(data) {
+export default function CustomLineChart(data: { data: any[] | undefined }) {
     return (
         <div>
             <LineChart width={screenWidth - 20} height={300} data={data.data} margin={{ top: 10, right: 0, bottom: 10, left: 0 }}>
