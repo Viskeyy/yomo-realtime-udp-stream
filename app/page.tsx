@@ -78,6 +78,13 @@ export default function Home() {
         });
     }, []);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            window.location.reload();
+        }, 1800 * 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <main className='flex flex-col items-center justify-between'>
             <div className='text-white'>YOMO realtime udp in/out datagrams stream</div>
